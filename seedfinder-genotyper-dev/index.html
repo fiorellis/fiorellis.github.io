@@ -66,11 +66,13 @@
 								console.log (`fetch promise then ${url}`);
 								let result = JSON.parse (response);
 								this.nodes[`${node.id}__${node.br}`] = result;
+								
+								console.log (`walk ${node.id}__${node.br}`);
+								return this.walk (this.nodes[`${node.id}__${node.br}`]);
 							});
 						})
 						.then ( () => {
-							console.log (`walk ${node.id}__${node.br}`);
-							return this.walk (this.nodes[`${node.id}__${node.br}`]);
+							
 						})
 						.catch(err => {this.error = err;} );
 					}
