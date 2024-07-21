@@ -49,7 +49,7 @@
 					distinguish_breeder: true,
 					group: true,
 				},
-				nodes: localStorage.getItem ('nodes') || {},
+				nodes: JSON.parse ( localStorage.getItem ('nodes') || '{}' ),
 				
 				fetch: function  (node, factor, order, pass=null) {
 					return new Promise( async (resolve, reject) => {
