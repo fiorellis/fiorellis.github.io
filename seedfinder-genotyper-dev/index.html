@@ -69,6 +69,8 @@
 							this.walk (this.nodes[`${node.id}__${node.br}`], factor, order, pass);
 						})
 						.catch(err => {this.error = err;} );
+						
+						console.log (`fetch ready ${url}`);
 					}
 					else {
 						console.log (`walk cache ${node.id}__${node.br}`);
