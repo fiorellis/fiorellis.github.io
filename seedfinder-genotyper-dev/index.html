@@ -61,7 +61,9 @@
 						return fetch (url)
 						.then(response => response.text())
 						.then((response) => {
+							console.log (`fetch then ${url}`);
 							return new Promise ( async (resolve, reject) => {
+								console.log (`fetch promise then ${url}`);
 								let result = JSON.parse (response);
 								this.nodes[`${node.id}__${node.br}`] = result;
 							});
