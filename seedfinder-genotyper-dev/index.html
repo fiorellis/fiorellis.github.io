@@ -52,29 +52,34 @@
 				nodes: {},
 				
 				fetch: function  (node, factor, order, pass=null) {
-					return new Promise( async (resolve, reject) => {
-						let url  = `https://en.seedfinder.eu/api/json/strain.json?br=${node.br}&str=${node.id}&lng=en&parents=1&ac=${api_token}`;
-						
-						if ( ! (`${node.id}__${node.br}` in this.nodes) )
-						{
-							console.log (`fetch ${url}`);
-							const result = await fetch (url)
-											   .then(response => response.json());;
-							this.nodes[`${node.id}__${node.br}`] = result;
-								
+					let url  = `https://en.seedfinder.eu/api/json/strain.json?br=${node.br}&str=${node.id}&lng=en&parents=1&ac=${api_token}`;
+					
+					if ( ! (`${node.id}__${node.br}` in this.nodes) )
+					{
+						console.log (`fetch ${url}`);
+						const request = new XMLHttpRequest();
+						request.open ("GET", url, false); // `false` makes the request synchronous
+						request.send (null);
+
+						if (request.status === 200) {
+						  let result = JSON.parse (request.responseText);
+						  this.nodes[`${node.id}__${node.br}`] = result;
+							
 							console.log (`walk ${node.id}__${node.br}`);
 							this.walk (this.nodes[`${node.id}__${node.br}`], factor, order, pass);
 						}
 						else {
-							console.log (`walk cache ${node.id}__${node.br}`);
-							this.walk (this.nodes[`${node.id}__${node.br}`], factor, order, pass);
+							error = `Error fetching ${url}`;
+							return;
 						}
 						
-						resolve (true);
-						return;
-					});
+					}
+					else {
+						console.log (`walk cache ${node.id}__${node.br}`);
+						this.walk (this.nodes[`${node.id}__${node.br}`], factor, order, pass);
+					}
 				},
-				walk: async function (node, factor, order, pass) {
+				walk: function (node, factor, order, pass) {
 					let p = node.parents;
 					this.status = `Loading<br /> ${node.id}`;
 					//console.log ('info', node, p.info, factor);
@@ -99,21 +104,21 @@
 						let pr1 = {id: p1.id, br: p1.brid};
 						
 						if (p.info == 'aaa') {
-							await this.fetch (pr1, factor, order + 1, node);
+							this.fetch (pr1, factor, order + 1, node);
 							return;
 						}
 						else if ( p.info.includes ('bbb') )
 						{
 							let pr2 = {id: p2.id, br: p2.brid};
 							if (p.info == 'aaa x bbb' || p.info == 'bbb x aaa') {
-								await this.fetch (pr1, factor * 0.5, order + 1);
-								await this.fetch (pr2, factor * 0.5, order + 1);
+								this.fetch (pr1, factor * 0.5, order + 1);
+								this.fetch (pr2, factor * 0.5, order + 1);
 								return;
 							}
 							else if (p.info == '{aaa x bbb} x aaa') {
-								await this.fetch (pr1, factor * 0.25, order + 2 );
-								await this.fetch (pr2, factor * 0.25, order + 2);
-								await this.fetch (pr1, factor * 0.5, order + 1 );
+								this.fetch (pr1, factor * 0.25, order + 2 );
+								this.fetch (pr2, factor * 0.25, order + 2);
+								this.fetch (pr1, factor * 0.5, order + 1 );
 								return;
 							}
 							
@@ -123,41 +128,41 @@
 								if (p.info == 'aaa x bbb x ccc') {
 									// Not sure what this means, let's say 1/3 each, even if
 									// it does not make sense
-									await this.fetch (pr1, factor * 1/3, order + 1);
-									await this.fetch (pr2, factor * 1/3, order + 1);
-									await this.fetch (pr3, factor * 1/3, order + 1);
+									this.fetch (pr1, factor * 1/3, order + 1);
+									this.fetch (pr2, factor * 1/3, order + 1);
+									this.fetch (pr3, factor * 1/3, order + 1);
 									return;
 								}
 								else if (p.info == 'aaa x {bbb x ccc}') {
-									await this.fetch (pr1, factor * 0.5, order + 1 );
-									await this.fetch (pr2, factor * 0.25, order + 2);
-									await this.fetch (pr3, factor * 0.25, order + 2 );
+									this.fetch (pr1, factor * 0.5, order + 1 );
+									this.fetch (pr2, factor * 0.25, order + 2);
+									this.fetch (pr3, factor * 0.25, order + 2 );
 									return;
 								}
 								else if (p.info == '{aaa x bbb} x ccc') {
-									await this.fetch (pr1, factor * 0.25, order + 2 );
-									await this.fetch (pr2, factor * 0.25, order + 2);
-									await this.fetch (pr3, factor * 0.5, order + 1 );
+									this.fetch (pr1, factor * 0.25, order + 2 );
+									this.fetch (pr2, factor * 0.25, order + 2);
+									this.fetch (pr3, factor * 0.5, order + 1 );
 									return;
 								}
 								else if (p.info == '{aaa x ccc} x bbb') {
-									await this.fetch (pr1, factor * 0.25, order + 2 );
-									await this.fetch (pr3, factor * 0.25, order + 2);
-									await this.fetch (pr2, factor * 0.5, order + 1 );
+									this.fetch (pr1, factor * 0.25, order + 2 );
+									this.fetch (pr3, factor * 0.25, order + 2);
+									this.fetch (pr2, factor * 0.5, order + 1 );
 									return;
 								}
 								else if (p.info == '{(aaa x aaa) x bbb} x {(aaa x aaa) x ccc}') {
-									await this.fetch (pr1, factor * 0.25, order + 2 );
-									await this.fetch (pr2, factor * 0.25, order + 2);
-									await this.fetch (pr1, factor * 0.25, order + 2 );
-									await this.fetch (pr3, factor * 0.25, order + 2 );
+									this.fetch (pr1, factor * 0.25, order + 2 );
+									this.fetch (pr2, factor * 0.25, order + 2);
+									this.fetch (pr1, factor * 0.25, order + 2 );
+									this.fetch (pr3, factor * 0.25, order + 2 );
 									return;
 								}
 								else if (p.info == '{bbb x aaa} x {ccc x aaa}') {
-									await this.fetch (pr2, factor * 0.25, order + 2 );
-									await this.fetch (pr1, factor * 0.25, order + 2);
-									await this.fetch (pr3, factor * 0.25, order + 2 );
-									await this.fetch (pr1, factor * 0.25, order + 2 );
+									this.fetch (pr2, factor * 0.25, order + 2 );
+									this.fetch (pr1, factor * 0.25, order + 2);
+									this.fetch (pr3, factor * 0.25, order + 2 );
+									this.fetch (pr1, factor * 0.25, order + 2 );
 									return;
 								}
 							}
