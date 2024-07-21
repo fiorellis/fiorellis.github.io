@@ -71,7 +71,7 @@
 						}
 					});
 				},
-				walk: async function (node, factor, order, pass) {
+				walk: function (node, factor, order, pass) {
 					let p = node.parents;
 					this.status = `Loading<br /> ${node.id}`;
 					//console.log ('info', node, p.info, factor);
