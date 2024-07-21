@@ -69,8 +69,6 @@
 							this.walk (this.nodes[`${node.id}__${node.br}`], factor, order, pass);
 						})
 						.catch(err => {this.error = err;} );
-						
-						console.log (`fetch ready ${url}`);
 					}
 					else {
 						console.log (`walk cache ${node.id}__${node.br}`);
@@ -194,7 +192,9 @@
 					}
 				}, 
 				run: function (node) {
+					console.log ('start');
 					this.fetch (node, 1, 0).then ( r => {
+						console.log ('end');
 						let result = Object.entries (this.strains);
 						/*for (let r of result) {
 							if (r[1].pass != null) {
