@@ -58,7 +58,7 @@
 						if ( ! (`${node.id}__${node.br}` in this.nodes) )
 						{
 							console.log (`fetch ${url}`);
-							const result = await fetch('https://api.com/values/1')
+							const result = await fetch (url)
 											   .then(response => response.json());;
 							this.nodes[`${node.id}__${node.br}`] = result;
 								
