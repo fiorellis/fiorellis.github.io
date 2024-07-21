@@ -197,74 +197,73 @@
 				}, 
 				run: function (node) {
 					console.log ('start');
-					this.fetch (node, 1, 0).then ( r => {
-						console.log ('end');
-						let result = Object.entries (this.strains);
-						/*for (let r of result) {
-							if (r[1].pass != null) {
-								console.log (r[1]);
-								let id1 = `${r[1].pass.id}_${r[1].pass.brinfo.id}`;
-								//console.log (1);
-								r[0] = `${id1} / ${r[0]}`;
-								//delete strains[id1];
-							}
-						}*/
-						result.sort ( (a, b) => a[1].order < b[1].order ? 1 : -1 );
+					this.fetch (node, 1, 0);
+					console.log ('end');
+					let result = Object.entries (this.strains);
+					/*for (let r of result) {
+						if (r[1].pass != null) {
+							console.log (r[1]);
+							let id1 = `${r[1].pass.id}_${r[1].pass.brinfo.id}`;
+							//console.log (1);
+							r[0] = `${id1} / ${r[0]}`;
+							//delete strains[id1];
+						}
+					}*/
+					result.sort ( (a, b) => a[1].order < b[1].order ? 1 : -1 );
+					
+					/*let groups = [];
+					let group = [];
+					let sum = 0;
+					for (let r of result.reverse()) {
 						
-						/*let groups = [];
-						let group = [];
-						let sum = 0;
-						for (let r of result.reverse()) {
-							
-							if ( r[1].amount == 1) {
-								console.log (r[0], r[1].amount);
-								groups.push ([r]);
-								group = [];
-								sum = 0;
-							}
-							
-							else if ( (sum + r[1].amount) < 1)
-							{
-								sum += r[1].amount;
-								group.push (r);
-							}
-							
-							else
-							{
-								groups.push (group);
-								group = [];
-								sum = 0;
-							}
-						}*/
+						if ( r[1].amount == 1) {
+							console.log (r[0], r[1].amount);
+							groups.push ([r]);
+							group = [];
+							sum = 0;
+						}
 						
-						/*let i=groups.length - 1; 
-						while ()
-							let group = groups[i];
-							if (group == null) {
-								groups.splice (i, 1);
-							}
-							else {
-								let sum = group.map ( g => g[1].amount ).reduce ( (accumulator, currentValue) => accumulator + currentValue, 0 );
-								console.log (group);
-								console.log (sum);
-								if (sum < 1 && i > 0) {
-									console.log (1);
-									let sum_prev = sum = groups[i - 1].map ( g => g[1].amount ) .reduce ( (accumulator, currentValue) => accumulator + currentValue, 0 );
-									if (sum + sum_prev <= 1) {
-										for (let e of group) {
-											groups[i - 1].push (e);
-										}
-										
-										groups.splice (i, 1);
-										console.log (3);
+						else if ( (sum + r[1].amount) < 1)
+						{
+							sum += r[1].amount;
+							group.push (r);
+						}
+						
+						else
+						{
+							groups.push (group);
+							group = [];
+							sum = 0;
+						}
+					}*/
+					
+					/*let i=groups.length - 1; 
+					while ()
+						let group = groups[i];
+						if (group == null) {
+							groups.splice (i, 1);
+						}
+						else {
+							let sum = group.map ( g => g[1].amount ).reduce ( (accumulator, currentValue) => accumulator + currentValue, 0 );
+							console.log (group);
+							console.log (sum);
+							if (sum < 1 && i > 0) {
+								console.log (1);
+								let sum_prev = sum = groups[i - 1].map ( g => g[1].amount ) .reduce ( (accumulator, currentValue) => accumulator + currentValue, 0 );
+								if (sum + sum_prev <= 1) {
+									for (let e of group) {
+										groups[i - 1].push (e);
 									}
+									
+									groups.splice (i, 1);
+									console.log (3);
 								}
 							}
-						}*/
-						this.raw_result = result;
-						this.status = null;
-						this.grouping();
-					});
+						}
+					}*/
+					this.raw_result = result;
+					this.status = null;
+					this.grouping();
 				},
 				grouping: function () {
 					if (this.settings.group) {
