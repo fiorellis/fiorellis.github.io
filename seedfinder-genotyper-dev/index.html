@@ -78,10 +78,10 @@
 					}
 					else {
 						console.log (`walk cache ${node.id}__${node.br}`);
-						return this.walk (this.nodes[`${node.id}__${node.br}`]);
+						return this.walk (this.nodes[`${node.id}__${node.br}`], order);
 					}
 				},
-				walk: function (node) {
+				walk: function (node, order) {
 					let p = node.parents;
 					this.status = `Loading<br /> ${node.id}`;
 					//console.log ('info', node, p.info, factor);
