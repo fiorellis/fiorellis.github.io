@@ -86,7 +86,7 @@
 					this.status = `Loading<br /> ${node.id}`;
 					//console.log ('info', node, p.info, factor);
 					
-					let strain_key = this.settings.distinguish_breeder ? `${result.id}__${result.brinfo.id}` : result.id;
+					let strain_key = this.settings.distinguish_breeder ? `${node.id}__${node.brinfo.id}` : node.id;
 					
 					if ( ! (strain_key in this.strains) ) {
 						this.strains[strain_key] = {amount: 0, order: order};
@@ -106,7 +106,7 @@
 						let pr1 = {id: p1.id, br: p1.brid};
 						
 						if (p.info == 'aaa') {
-							this.fetch (pr1, factor, order + 1, result);
+							this.fetch (pr1, factor, order + 1, node);
 							return;
 						}
 						else if ( p.info.includes ('bbb') )
