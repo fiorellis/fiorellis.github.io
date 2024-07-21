@@ -57,6 +57,7 @@
 					
 					if ( ! (`${node.id}__${node.br}` in this.nodes) )
 					{
+						console.log (`fetch ${url}`);
 						return fetch (url)
 						.then(response => response.text())
 						.then((response) => {
@@ -66,11 +67,13 @@
 							});
 						})
 						.then ( () => {
+							console.log (`walk `${node.id}__${node.br}`);
 							return this.walk (this.nodes[`${node.id}__${node.br}`]);
 						})
 						.catch(err => {this.error = err;} );
 					}
 					else {
+						console.log (`walk cache `${node.id}__${node.br}`);
 						return this.walk (this.nodes[`${node.id}__${node.br}`]);
 					}
 				},
