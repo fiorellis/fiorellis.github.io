@@ -308,7 +308,7 @@
 					   @change="if (result != null) grouping();" />
 				group results
 			</label>
-			<input type="text" x-model="filter" placeholder="filter, e.g. &quot;indica&quot;" />
+			<input type="text" x-model="filter" :disabled="result == null" placeholder="filter, e.g. &quot;indica&quot;" />
 		</div>
 		<button @click="process()" type="button" style="margin-top: 0.2rem;">Fetch</button>
 	</div>
