@@ -61,8 +61,7 @@
 							console.log (`fetch ${url}`);
 							const result = await fetch (url)
 											   .then(response => response.json());
-							console.log (node.brinfo);
-							this.nodes[`${node.id}__${node.br}`] = {id: result.id, br: node.br, parents: node.parents, brinfo: node.brinfo};
+							this.nodes[`${node.id}__${node.br}`] = {id: result.id, br: result.br, parents: result.parents, brinfo: result.brinfo};
 							localStorage.setItem ( 'nodes', JSON.stringify (this.nodes) );
 								
 							console.log (`walk ${node.id}__${node.br}`);
