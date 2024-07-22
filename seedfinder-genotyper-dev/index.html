@@ -84,7 +84,7 @@
 					let strain_key = this.settings.distinguish_breeder ? `${node.id}__${node.brinfo.id}` : node.id;
 					
 					if ( ! (strain_key in this.strains) ) {
-						this.strains[strain_key] = {amount: 0, order: order, name: node.name};
+						this.strains[strain_key] = {amount: 0, order: order, name: node.name, brname: node.brinfo.name};
 						if (pass != null) {
 							this.strains[strain_key].pass = pass;
 						}
@@ -343,9 +343,9 @@
 											justify-content: space-between;
 											flex-wrap: wrap;"
 									 :style="{width: `${r[1].amount * 100}%`, 'background-color': colors[ri % colors.length]}"
-									 :title="`${r[1].name} ${settings.distinguish_breeder ? '(' + r[1].brinfo.name + ')' : ''} ${Math.round (r[1].amount * 100 * 100) / 100} %`">
+									 :title="`${r[1].name} ${settings.distinguish_breeder ? '(' + r[1].brname + ')' : ''} ${Math.round (r[1].amount * 100 * 100) / 100} %`">
 										<span x-html="r[1].name"></span>
-										<span x-show="settings.distinguish_breeder" x-html="`(${r[1].brinfo.name})`"></span>
+										<span x-show="settings.distinguish_breeder" x-html="`(${r[1].brname})`"></span>
 										<span x-html="`${Math.round (r[1].amount * 100 * 100) / 100}%`"></span>
 									 </div>
 							</template>
@@ -367,7 +367,7 @@
 							:style="{width: `${r[1].amount * 100}%`, 'background-color': colors[ri % colors.length]}"
 							:title="`${r[1].name} ${Math.round (r[1].amount * 100 * 100) / 100} %`">
 							<span x-html="r[1].name"></span>
-							<span x-show="settings.distinguish_breeder" x-html="`(${r[1].brinfo.name})`"></span>
+							<span x-show="settings.distinguish_breeder" x-html="`(${r[1].brname})`"></span>
 							<span x-html="`${Math.round (r[1].amount * 100 * 100) / 100}%`"></span>
 						 </div>
 					</template>
