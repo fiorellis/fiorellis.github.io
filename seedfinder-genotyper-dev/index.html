@@ -187,8 +187,6 @@
 					}
 					else {
 						let node = {id: groups[1], br: groups[2]};
-						//let node = {id: 'Shiva_Skunk', br: 'Sensi_Seeds'}
-						//console.log (node, groups);
 						this.run (node);
 					}
 				}, 
@@ -277,9 +275,6 @@
 					}
 					else {
 						this.result = this.raw_result;
-						for (let r of this.result) { 
-							console.log (r[0])
-						};
 					}
 				},
 				
@@ -314,7 +309,6 @@
 				group results
 			</label>
 			<input type="text" x-model="filter" placeholder="filter, e.g. &quot;indica&quot;" />
-			<span x-html="filter" />
 		</div>
 		<button @click="process()" type="button" style="margin-top: 0.2rem;">Fetch</button>
 	</div>
@@ -357,7 +351,6 @@
 					</div>
 				</template>
 			</template>
-			<span x-html="JSON.stringify (result)"></span>
 			<template x-if="!settings.group && result != null">
 				<template x-for="(r, ri) in result" :key="ri">
 					<template x-if="Array.isArray (r) && r.length > 0 && r[0].toLowerCase != null && r[0].toLowerCase().includes ( filter.toLowerCase() )">
