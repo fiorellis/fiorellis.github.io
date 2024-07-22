@@ -360,7 +360,7 @@
 			<span x-html="JSON.stringify (result)"></span>
 			<template x-if="!settings.group && result != null">
 				<template x-for="(r, ri) in result" :key="ri">
-					<template x-if="r?.toLowerCase != null && r[0].toLowerCase().includes ( filter.toLowerCase() )">
+					<template x-if="Array.isArray (r) && r.length > 0 && r[0].toLowerCase != null && r[0].toLowerCase().includes ( filter.toLowerCase() )">
 						<div style="padding-top: 1rem;
 								padding-bottom: 1rem;
 								margin: 0.2rem;
