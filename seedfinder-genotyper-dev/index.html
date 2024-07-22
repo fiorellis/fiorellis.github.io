@@ -15,6 +15,12 @@
 			display: inline-block;
 		}
 		
+		.textbox {
+			background-color: rgba(0,0,0,0.1);
+			border-radius: 0.5rem;
+			padding: 0.2rem;
+		}
+		
 		.loader {
 			width: 48px;
 			height: 48px;
@@ -344,9 +350,12 @@
 											flex-wrap: wrap;"
 									 :style="{width: `${r[1].amount * 100}%`, 'background-color': colors[ri % colors.length]}"
 									 :title="`${r[1].name} ${settings.distinguish_breeder ? '(' + r[1].brname + ')' : ''} ${Math.round (r[1].amount * 100 * 100) / 100} %`">
-										<span x-html="r[1].name"></span>
-										<span x-show="settings.distinguish_breeder" x-html="`(${r[1].brname})`"></span>
-										<span x-html="`${Math.round (r[1].amount * 100 * 100) / 100}%`"></span>
+										<span x-html="r[1].name" class="textbox"></span>
+										<span x-show="settings.distinguish_breeder"
+											  x-html="`(${r[1].brname})`"
+											  class="textbox"></span>
+										<span x-html="`${Math.round (r[1].amount * 100 * 100) / 100}%`"
+											  class="textbox"></span>
 									 </div>
 							</template>
 						</template>
