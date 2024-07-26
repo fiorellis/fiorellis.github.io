@@ -45,6 +45,11 @@
 	<script src="https://unpkg.com/alpinejs" defer></script>
 	<script src="api_token.js"></script>
 	<script>
+		if ( localStorage.getItem ('updated') == null || Number ( localStorage.getItem ('updated') ) < 1722021389035 ) {
+			localStorage.clear();
+			localStorage.setItem ('updated', 1722021389036);
+		}
+		
 		function App() {
 			return {
 				strains: {},
