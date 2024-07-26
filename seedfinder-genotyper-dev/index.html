@@ -115,6 +115,7 @@
 						let p1 = p.strains.aaa;
 						let p2 = p.strains.bbb;
 						let p3 = p.strains.ccc;
+						let p4 = p.strains.ddd;
 						
 						let pr1 = {id: p1.id, br: p1.brid};
 						
@@ -179,6 +180,18 @@
 									await this.fetch (pr3, factor * 0.25, order + 2 );
 									await this.fetch (pr1, factor * 0.25, order + 2 );
 									return;
+								}
+								else if ( p.info.includes ('ddd') ) {
+									let pr4 = {id: p4.id, br: p4.brid};
+									
+									if (p.info == 'aaa x bbb x ccc x ddd') {
+										await this.fetch (pr1, factor * 0.25, order + 1 );
+										await this.fetch (pr2, factor * 0.25, order + 1);
+										await this.fetch (pr3, factor * 0.25, order + 1 );
+										await this.fetch (pr4, factor * 0.25, order + 1 );
+										return;
+									}
+									
 								}
 							}
 							
