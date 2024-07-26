@@ -96,7 +96,6 @@
 				},
 				walk: async function (node, factor, order, pass) {
 					let p = node.parents;
-					p.info = p.info.replace(/ +(?= )/g, '');
 					this.status = `Loading<br /> ${node.id}`;
 					//console.log ('info', node, p.info, factor);
 					
@@ -113,6 +112,8 @@
 					this.strains[strain_key].order = Math.max (order, this.strains[strain_key].order);
 					
 					if (p) {
+						p.info = p.info.replace(/ +(?= )/g, '');
+						
 						let p1 = p.strains.aaa;
 						let p2 = p.strains.bbb;
 						let p3 = p.strains.ccc;
