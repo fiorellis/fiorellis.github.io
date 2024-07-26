@@ -96,6 +96,7 @@
 				},
 				walk: async function (node, factor, order, pass) {
 					let p = node.parents;
+					p.info = p.info.replace(/ +(?= )/g, '');
 					this.status = `Loading<br /> ${node.id}`;
 					//console.log ('info', node, p.info, factor);
 					
@@ -126,7 +127,7 @@
 						else if ( p.info.includes ('bbb') )
 						{
 							let pr2 = {id: p2.id, br: p2.brid};
-							if ( ['aaa x bbb', 'bbb x aaa', 'bbb x  aaa'].includes (p.info) ) {
+							if ( ['aaa x bbb', 'bbb x aaa', 'bbb x aaa'].includes (p.info) ) {
 								await this.fetch (pr1, factor * 0.5, order + 1);
 								await this.fetch (pr2, factor * 0.5, order + 1);
 								return;
