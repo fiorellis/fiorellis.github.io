@@ -338,7 +338,10 @@
 	</div>
 	
 	<template x-if="error != null">
-		<div x-html="error" style="background-color: #C40D0A; padding: 0.5rem; border-radius: 0.5rem; margin: 0.5rem; color: white;"></div>
+		<div style="background-color: #C40D0A; padding: 0.5rem; border-radius: 0.5rem; margin: 0.5rem; color: white;">
+			<b>Error:</b>
+			<span x-html="error"></span>
+		</div>
 	</template>
 	
 	<template x-if="status != null && error == null">
