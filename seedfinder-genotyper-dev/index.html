@@ -60,9 +60,9 @@
 				
 				fetch: function  (node, factor, order, pass=null) {
 					return new Promise( async (resolve, reject) => {
-						let url  = `https://en.seedfinder.eu/api/json/strain.json?br=${node.brinfo.name}&str=${node.id}&lng=en&parents=1&ac=${api_token}`;
+						let url  = `https://en.seedfinder.eu/api/json/strain.json?br=${node.br}&str=${node.id}&lng=en&parents=1&ac=${api_token}`;
 						
-						if ( ! (`${node.id}__${node.brinfo.name}` in this.nodes) )
+						if ( ! (`${node.id}__${node.br}` in this.nodes) )
 						{
 							console.log (`fetch ${url}`);
 							const result = await fetch (url)
@@ -74,15 +74,15 @@
 								return;
 							}
 							
-							this.nodes[`${node.id}__${node.brinfo.name}`] = {id: result.id, name: result.name, parents: result.parents, brinfo: {id: result.brinfo.id, name: result.brinfo.name}};
+							this.nodes[`${node.id}__${node.br}`] = {id: result.id, name: result.name, br: result.brinfo.name, parents: result.parents, brinfo: {id: result.brinfo.id, name: result.brinfo.name}};
 							localStorage.setItem ( 'nodes', JSON.stringify (this.nodes) );
 								
-							console.log (`walk ${node.id}__${node.brinfo.name}`);
-							await this.walk (this.nodes[`${node.id}__${node.brinfo.name}`], factor, order, pass);
+							console.log (`walk ${node.id}__${node.br}`);
+							await this.walk (this.nodes[`${node.id}__${node.br}`], factor, order, pass);
 						}
 						else {
-							console.log (`walk cache ${node.id}__${node.brinfo.name}`);
-							await this.walk (this.nodes[`${node.id}__${node.brinfo.name}`], factor, order, pass);
+							console.log (`walk cache ${node.id}__${node.br}`);
+							await this.walk (this.nodes[`${node.id}__${node.br}`], factor, order, pass);
 						}
 						
 						resolve (true);
@@ -199,7 +199,7 @@
 						this.error = 'Invalid url';
 					}
 					else {
-						let node = {id: groups[1], brinfo: {name: groups[2]}};
+						let node = {id: groups[1], br: groups[2]};
 						this.run (node);
 					}
 				}, 
