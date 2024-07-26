@@ -1,6 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
 	<title>Seedfinder Genotyper</title>
@@ -42,6 +41,7 @@
 		} 
 	
 	</style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 	<script src="https://unpkg.com/alpinejs" defer></script>
 	<script src="api_token.js"></script>
 	<script>
@@ -305,7 +305,13 @@
 </head>
 
 <body x-data="App()">
-	<h1>Seedfinder Genotyper</h1>
+	<div style="display: flex; justify-content: space-between;">
+		<h1>
+			<i class="fa-solid fa-cannabis" style="color: #006708;"></i>
+			Seedfinder Genotyper
+		</h1>
+		<a href="seedfinder.eu"><img src="https://de.seedfinder.eu/pics/banner/seedfinder-code.png" /></a>
+	</div>
 	<div style="margin: 0xp auto; display: flex; justify-content: center; flex-direction: column;">
 		<input type="text"
 			   x-model="url"
@@ -326,7 +332,7 @@
 					   @change="if (result != null) grouping();" />
 				group results
 			</label>
-			<input type="text" x-model="filter" :disabled="result == null" placeholder="filter, e.g. &quot;indica&quot;" />
+			<input type="text" x-model="filter" :disabled="result == null" size="30" placeholder="filter, e.g. &quot;indica&quot;, &quot;skunk&quot; or &quot;haze&quot;" />
 		</div>
 		<button @click="process()" type="button" style="margin-top: 0.2rem;">Fetch</button>
 	</div>
