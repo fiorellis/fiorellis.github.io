@@ -118,10 +118,13 @@
 					}
 					
 					console.log (2, node.id);
-					let _ignore = this.settings.distignuish_breeder ?
-						ignore
-						:
-						[...ignore, node.id];
+					let _ignore = ignore;
+					if (this.settings.distignuish_breeder)
+					{
+						console.log (2, node.id);
+						_ignore = [...ignore, node.id];
+					}
+						
 					
 					this.strains[strain_key].order = Math.max (order, this.strains[strain_key].order);
 					
