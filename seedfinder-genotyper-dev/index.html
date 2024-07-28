@@ -111,16 +111,17 @@
 						this.strains[strain_key] = {amount: 0, order: order, name: node.name, brname: node.brinfo.name};
 					}
 					
-					console.log (ignore);
+					console.log (1, ignore);
 					if ( !ignore.includes (strain_key) )
 					{
 						this.strains[strain_key].amount += factor;
 					}
 					
+					console.log (2, node.id);
 					let _ignore = this.settings.distignuish_breeder ?
-					ignore
-					:
-					[...ignore, node.id];
+						ignore
+						:
+						[...ignore, node.id];
 					
 					this.strains[strain_key].order = Math.max (order, this.strains[strain_key].order);
 					
