@@ -111,6 +111,7 @@
 						this.strains[strain_key] = {amount: 0, order: order, name: node.name, brname: node.brinfo.name};
 					}
 					
+					console.log (ignore);
 					if ( !ignore.includes (strain_key) )
 					{
 						this.strains[strain_key].amount += factor;
