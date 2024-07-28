@@ -73,7 +73,6 @@
 					return new Promise( async (resolve, reject) => {
 						let url  = `https://en.seedfinder.eu/api/json/strain.json?br=${node.br}&str=${node.id}&lng=en&parents=1&ac=${api_token}`;
 							
-						console.log (0, ignore);
 						if ( ! (`${node.id}__${node.br}` in this.nodes) )
 						{
 							console.log (`fetch ${url}`);
@@ -112,19 +111,16 @@
 						this.strains[strain_key] = {amount: 0, order: order, name: node.name, brname: node.brinfo.name};
 					}
 					
-					console.log (1, ignore);
 					if ( !ignore.includes (strain_key) )
 					{
 						this.strains[strain_key].amount += factor;
 					}
 					
 					let _ignore = ignore;
-					if (!this.settings.distignuish_breeder)
+					if (!this.settings.distinguish_breeder)
 					{
-						console.log (2, node.id);
 						_ignore = [...ignore, node.id];
 					}
-						
 					
 					this.strains[strain_key].order = Math.max (order, this.strains[strain_key].order);
 					
@@ -138,10 +134,8 @@
 						
 						let pr1 = {id: p1.id, br: p1.brid};
 						
-						
-						
 						if (p.info == 'aaa') {
-							await this.fetch (pr1, factor, order + 1, node, _ignore);
+							await this.fetch (pr1, factor, order + 1, _ignore);
 							return;
 						}
 						else if ( p.info.includes ('bbb') )
